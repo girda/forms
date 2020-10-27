@@ -1,0 +1,53 @@
+
+<div class="container">
+
+    <div class="search">
+        <label for="search">Search</label>
+        <input 
+            type="text" 
+            placeholder="Search" 
+            id="search"
+            #search
+        >
+    </div>
+    
+    <ng-container *ngIf="forms; else loader">
+
+        <table>
+            <tr>
+                <td>Form id</td>
+                <td>First name</td>
+                <td>Last name</td>
+                <td>Middle name</td>
+                <td>Birthdate</td>
+                <td>Сумма заказа</td>
+            </tr>
+        
+            
+            <tr *ngFor="let form of forms">
+                <td>{{form.id}}</td>
+                <td *ngFor="let field_values of form.form_field_values">{{field_values.form_field_id === 4 ? (field_values.value | date) : field_values.value }}</td>
+                <td><button (click)="onEdit($event, form)" >edit</button></td>
+                <td><button (click)="onDelete($event, form)">delete</button></td>
+            </tr>
+            
+            
+        </table>
+        
+        <ng-container *ngIf="pageCount.length > 1">
+            <div class="pagination">
+                <button 
+                    *ngFor="let page of pageCount; let i = index"
+                    (click)="changePage($event, i+1)"
+                >
+                    {{i + 1}}
+                </button>
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <ng-template #loader>
+        <div>Loading...</div>
+    </ng-template>
+</div>
+

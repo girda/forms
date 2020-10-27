@@ -1,0 +1,57 @@
+{{data.name}}
+<form 
+    [formGroup]="form"
+    class="form"
+>
+
+    <label for="first_name">
+        First name
+        <input 
+            type="text" 
+            formControlName="first_name"
+            id="first_name"
+        >
+    </label>
+    
+    <label for="last_name">
+        Last name
+        <input 
+            type="text" 
+            formControlName="last_name"
+            id="last_name"
+        >
+    </label>
+
+    <label for="middle_name">
+        Middle name
+        <input 
+            type="text" 
+            formControlName="middle_name"
+            id="middle_name"
+        >
+    </label>
+
+    <label for="birthdate">
+        Birthdate
+        <input 
+            type="date"
+            formControlName="birthdate"
+            id="birthdate"
+        >
+    </label>
+    
+    <label for="order_amount">
+        Сумма заказа
+        <input 
+            type="number"
+            formControlName="order_amount"
+            id="order_amount"
+        >
+    </label>
+    
+    <div class="form__btns">
+        <button type="submit" (click)="onCancel()">Cancel</button>
+        <button type="submit" (click)="onSubmit()">Submit</button>
+    </div>
+    
+</form>
