@@ -32,7 +32,7 @@ export class PopupComponent implements OnInit {
       first_name: this.data.first_name.value,
       last_name: this.data.last_name.value,
       middle_name: this.data.middle_name.value,
-      birthdate: new Date(this.data.birthdate.value).toISOString().substring(0, 10),
+      birthdate: this.data.birthdate.value ? new Date(this.data.birthdate.value).toISOString().substring(0, 10) : '',
       order_amount: this.data.order_amount.value
     })
   }
@@ -63,8 +63,13 @@ export class PopupComponent implements OnInit {
         ]
     }
     console.log(formFieldVaues);
-    
-    this.formService.update(this.data.form_id, formFieldVaues).subscribe(res => console.log(res))
+    console.log(this.data.form_id);
+    if (this.data.form_id) {
+      this.formService.update(this.data.form_id, formFieldVaues).subscribe(res => console.log(res))
+    } else {
+      this.formService.create(formFieldVaues).subscribe(res => console.log(res))
+    }
+    this.dialogRef.close()
   }
 
   onCancel() {

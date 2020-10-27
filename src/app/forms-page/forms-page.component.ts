@@ -55,9 +55,56 @@ export class FormsPageComponent implements OnInit, OnDestroy, AfterViewInit {
     )
   }
 
+  filterDate(event) {
+    console.log(event.target.value);
+    
+    this.formsSubscription = this.formService.fetchByDate(event.target.value).subscribe(
+      res => {
+        this.forms = res.data;
+        this.pageCount = new Array(res.meta.pages_count)
+      }
+    )
+  }
+
+  createForm() {
+    const dialogRef = this.matDialog.open(PopupComponent, {data: {
+      first_name: {
+        value: '', 
+        form_field_id: 1
+      },
+      last_name: {
+        value: '', 
+        form_field_id: 2
+      },
+      middle_name: {
+        value: '', 
+        form_field_id: 3
+      },
+      birthdate: {
+        value: '', 
+        form_field_id: 4
+      },
+      order_amount: {
+        value: '', 
+        form_field_id: 5
+      }
+    }});
+
+    dialogRef.afterClosed().subscribe(
+      () => {
+        this.formsSubscription = this.formService.fetch().subscribe(
+          res => {
+            this.forms = res.data
+          }
+        )
+      }
+    )
+
+  }
+
   onEdit(event, form) { 
 
-    this.matDialog.open(PopupComponent, {data: {
+    const dialogRef = this.matDialog.open(PopupComponent, {data: {
       first_name: {
         value: form.form_field_values[0].value, 
         form_field_id: form.form_field_values[0].form_field_id
@@ -81,6 +128,15 @@ export class FormsPageComponent implements OnInit, OnDestroy, AfterViewInit {
       form_id: form.id
     }});
 
+    dialogRef.afterClosed().subscribe(
+      () => {
+        this.formsSubscription = this.formService.fetch().subscribe(
+          res => {
+            this.forms = res.data
+          }
+        )
+      }
+    )
   }
 
   changePage(event, currentPage) {

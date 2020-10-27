@@ -28,8 +28,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       if (params['accessDenied']) {
         alert('Для начала нужно зарегистрироваться в системе')
       }
-
     })
+    this.auth.logout();
   }
 
   ngOnDestroy() {

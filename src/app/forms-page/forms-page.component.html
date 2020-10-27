@@ -1,15 +1,43 @@
 
-<div class="container">
+<div class="container forms">
 
-    <div class="search">
-        <label for="search">Search</label>
-        <input 
-            type="text" 
-            placeholder="Search" 
-            id="search"
-            #search
-        >
+    <div class="forms__top">
+        <div class="forms__search">
+            <label for="search">Search</label>
+            <input 
+                type="text" 
+                placeholder="Search" 
+                id="search"
+                #search
+            >
+        </div>
+
+        <div class="forms__filter">
+            <label for="filter">Filter by date</label>
+            <select 
+                (change)="filterDate($event)"
+                id="filter"
+            >
+                <ng-container *ngIf="forms">
+                    <option 
+                        *ngFor="let form of forms"
+                        value="{{form.created_at}}"
+                    >{{form.created_at | date}}</option>
+                </ng-container>
+            </select>
+
+        </div>
+
+        <div class="forms__create">
+            <button
+                type="button"
+                (click)="createForm()"
+            >
+                Create form
+            </button>
+        </div>
     </div>
+    
     
     <ng-container *ngIf="forms; else loader">
 
