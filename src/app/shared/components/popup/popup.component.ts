@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Inject} from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormService } from '../../services/form.service';
 
@@ -18,11 +18,11 @@ export class PopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      first_name: new FormControl(null),
-      last_name: new FormControl(null),
-      middle_name: new FormControl(null),
-      birthdate: new FormControl(null),
-      order_amount: new FormControl(null)
+      first_name: new FormControl(null,[Validators.required, Validators.maxLength(255)]),
+      last_name: new FormControl(null, [Validators.required, Validators.maxLength(255)]),
+      middle_name: new FormControl(null, [Validators.maxLength(255)]),
+      birthdate: new FormControl(null, [Validators.required]),
+      order_amount: new FormControl(null, [Validators.min(0), Validators.max(1000000)])
     })
 
     console.log(this.data);
