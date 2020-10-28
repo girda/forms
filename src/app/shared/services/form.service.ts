@@ -14,7 +14,7 @@ export class FormService {
   } 
 
   fetchByDate(date): Observable<any> {
-    return this.http.get<any>(`https://test.s-group.vn.ua/api/v1/forms?created_at,>=,${date}`)
+    return this.http.get<any>(`https://test.s-group.vn.ua/api/v1/forms?filters=created_at,>=,${date}`)
   }
 
   getBySearch(search: string): Observable<any> {

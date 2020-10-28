@@ -55,10 +55,8 @@ export class FormsPageComponent implements OnInit, OnDestroy, AfterViewInit {
     )
   }
 
-  filterDate(event) {
-    console.log(event.target.value);
-    
-    this.formsSubscription = this.formService.fetchByDate(event.target.value).subscribe(
+  filterDate(event) {   
+    this.formsSubscription = this.formService.fetchByDate(new Date(event.target.value).toJSON()).subscribe(
       res => {
         this.forms = res.data;
         this.pageCount = new Array(res.meta.pages_count)

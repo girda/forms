@@ -13,19 +13,12 @@
         </div>
 
         <div class="forms__filter">
-            <label for="filter">Filter by date</label>
-            <select 
+            <label for="filter_by_date">Filter by date</label>
+            <input 
+                type="date"
+                id="filter_by_date"
                 (change)="filterDate($event)"
-                id="filter"
             >
-                <ng-container *ngIf="forms">
-                    <option 
-                        *ngFor="let form of forms"
-                        value="{{form.created_at}}"
-                    >{{form.created_at | date}}</option>
-                </ng-container>
-            </select>
-
         </div>
 
         <div class="forms__create">
